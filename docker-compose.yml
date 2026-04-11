@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Main canopy node service
+  canopy:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    container_name: canopy-node
+    restart: unless-stopped
+    ports:
+      - "${P2P_PORT:-9000}:9000"       # P2P networking port
+      - "${RPC_PORT:-50832}:50832"     # RPC API port
+      - "${ADMIN_PORT:-50833}:50833"   # Admin API port
+    volumes:
+      - canopy-data:/root/.canopy
+    environment:
+      - CANOPY_ENV=${CANOPY_ENV:-mainnet}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    networks:
+      - canopy-net
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:50832/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # Auto-update service (generic shell-based)
+  auto-update:
+    build:
+      context: .
+      dockerfile: .docker/auto-update/Dockerfile
+    container_name: canopy-auto-update
+    restart: unless-stopped
+    depends_on:
+      canopy:
+        condition: service_healthy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - canopy-data:/root/.canopy
+    environment:
+      - UPDATE_INTERVAL=${UPDATE_INTERVAL:-3600}   # Check every hour by default
+      - CANOPY_CONTAINER=canopy-node
+      - GITHUB_REPO=${GITHUB_REPO:-canopy-network/canopy}
+    networks:
+      - canopy-net
+    profiles:
+      - auto-update
+
+volumes:
+  canopy-data:
+    driver: local
+
+networks:
+  canopy-net:
+    driver: bridge

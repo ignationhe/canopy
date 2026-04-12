@@ -77,6 +77,9 @@ clean:
 	@echo ">> Cleaning build artifacts..."
 	@rm -rf $(BUILD_DIR)
 
+## dev: fmt + tidy + test-short in one step (handy for quick iteration)
+dev: fmt tidy test-short
+
 ## help: Show this help message
 help:
 	@echo "Usage: make [target]"

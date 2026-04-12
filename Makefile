@@ -77,9 +77,10 @@ clean:
 	@echo ">> Cleaning build artifacts..."
 	@rm -rf $(BUILD_DIR)
 
-## dev: fmt + tidy + test-short in one step (handy for quick iteration)
-# NOTE: using test-short here to keep the dev loop fast; run `make test` before pushing
-dev: fmt tidy test-short
+## dev: fmt + tidy + test in one step (handy for quick iteration)
+# NOTE: switched from test-short to test so the race detector always runs locally;
+# the extra time is worth catching races early on my machine.
+dev: fmt tidy test
 
 ## help: Show this help message
 help:

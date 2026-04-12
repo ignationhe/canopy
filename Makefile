@@ -31,6 +31,11 @@ test:
 	@echo ">> Running tests..."
 	go test -v -race -cover ./...
 
+## test-short: Run tests without the race detector (faster for quick checks)
+test-short:
+	@echo ">> Running tests (short)..."
+	go test -short -cover ./...
+
 ## lint: Run golangci-lint
 lint:
 	@echo ">> Linting..."

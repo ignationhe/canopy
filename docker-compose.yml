@@ -24,7 +24,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 60s  # increased from 30s - node takes longer to start on my machine
+      start_period: 90s  # bumped further - first-time sync on my machine takes ~90s
 
   # Auto-update service (generic shell-based)
   auto-update:
@@ -40,7 +40,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - canopy-data:/root/.canopy
     environment:
-      - UPDATE_INTERVAL=${UPDATE_INTERVAL:-3600}   # Check every hour by default
+      - UPDATE_INTERVAL=${UPDATE_INTERVAL:-7200}   # Check every 2 hours - hourly felt too aggressive
       - CANOPY_CONTAINER=canopy-node
       - GITHUB_REPO=${GITHUB_REPO:-canopy-network/canopy}
     networks:

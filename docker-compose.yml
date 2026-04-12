@@ -24,7 +24,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 30s
+      start_period: 60s  # increased from 30s - node takes longer to start on my machine
 
   # Auto-update service (generic shell-based)
   auto-update:

@@ -70,15 +70,16 @@ docker-down:
 
 ## docker-logs: Tail logs from Docker Compose services
 docker-logs:
-	@docker compose -f $(COMPOSE_FILE) logs -f
+	docker compose -f $(COMPOSE_FILE) logs -f
 
 ## clean: Remove build artifacts
 clean:
 	@echo ">> Cleaning build artifacts..."
 	@rm -rf $(BUILD_DIR)
 
-## dev: fmt + tidy + test-short in one step (handy for quick iteration)
-dev: fmt tidy test-short
+## dev: fmt + tidy + test in one step (handy for quick iteration)
+# NOTE: switched from test-short to test here so I always catch race conditions locally
+dev: fmt tidy test
 
 ## help: Show this help message
 help:

@@ -24,7 +24,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 90s  # bumped further - first-time sync on my machine takes ~90s
+      start_period: 120s  # bumped to 120s - my laptop is slower than CI, 90s wasn't always enough
 
   # Auto-update service (generic shell-based)
   auto-update:

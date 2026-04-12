@@ -51,6 +51,10 @@ services:
 volumes:
   canopy-data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DATA_DIR:-./data}  # bind mount so data is easy to inspect/backup locally
 
 networks:
   canopy-net:

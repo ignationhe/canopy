@@ -80,8 +80,9 @@ clean:
 ## dev: fmt + tidy + test in one step (handy for quick iteration)
 # NOTE: switched from test-short to test so the race detector always runs locally;
 # the extra time is worth catching races early on my machine.
-# NOTE: added lint here so I don't forget to run it before pushing a branch.
-dev: fmt tidy lint test
+# NOTE: removed lint from dev target - I find it too slow for rapid iteration;
+# run 'make lint' manually before opening a PR instead.
+dev: fmt tidy test
 
 ## help: Show this help message
 help:

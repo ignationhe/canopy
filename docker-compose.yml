@@ -24,7 +24,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 120s  # bumped to 120s - my laptop is slower than CI, 90s wasn't always enough
+      start_period: 150s  # bumped further - 120s still occasionally fails on my machine under load
 
   # Auto-update service (generic shell-based)
   auto-update:

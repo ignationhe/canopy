@@ -24,7 +24,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 150s  # bumped further - 120s still occasionally fails on my machine under load
+      start_period: 180s  # bumped to 180s - 150s still occasionally times out on my older laptop
 
   # Auto-update service (generic shell-based)
   auto-update:

@@ -89,6 +89,13 @@ dev: fmt tidy test
 # to catch anything that would fail in the pipeline without waiting for remote CI.
 ci: lint test
 
+## cover: Run tests and open an HTML coverage report in the browser
+# NOTE: handy for visually spotting untested code paths while exploring the codebase.
+cover:
+	@echo ">> Generating coverage report..."
+	go test -coverprofile=coverage.out ./...
+	go tool cover -html=coverage.out
+
 ## help: Show this help message
 help:
 	@echo "Usage: make [target]"

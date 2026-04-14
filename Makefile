@@ -84,6 +84,11 @@ clean:
 # run 'make lint' manually before opening a PR instead.
 dev: fmt tidy test
 
+## ci: lint + test - intended to mirror what CI runs, useful to check locally before pushing
+# NOTE: this is my personal sanity-check target; run 'make ci' before pushing a branch
+# to catch anything that would fail in the pipeline without waiting for remote CI.
+ci: lint test
+
 ## help: Show this help message
 help:
 	@echo "Usage: make [target]"

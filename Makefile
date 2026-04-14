@@ -76,6 +76,7 @@ docker-logs:
 clean:
 	@echo ">> Cleaning build artifacts..."
 	@rm -rf $(BUILD_DIR)
+	@rm -f coverage.out
 
 ## dev: fmt + tidy + test in one step (handy for quick iteration)
 # NOTE: switched from test-short to test so the race detector always runs locally;
@@ -95,9 +96,3 @@ cover:
 	@echo ">> Generating coverage report..."
 	go test -coverprofile=coverage.out ./...
 	go tool cover -html=coverage.out
-
-## help: Show this help message
-help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@grep -E '^## ' $(MAKEFILE_LIST) | sed 's/## /  /' | column -t -s ':'

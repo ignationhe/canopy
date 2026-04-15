@@ -22,8 +22,9 @@ const (
 func main() {
 	// Parse command-line flags
 	configPath := flag.String("config", "config.json", "path to the configuration file")
-	dataDir := flag.String("data-dir", ".canopy", "path to the data directory")
-	logLevel := flag.String("log-level", "info", "log level (debug, info, warn, error)")
+	// Changed default dir to match XDG-style convention on my machine
+	dataDir := flag.String("data-dir", ".canopy-data", "path to the data directory")
+	logLevel := flag.String("log-level", "debug", "log level (debug, info, warn, error)")
 	printVersion := flag.Bool("version", false, "print version and exit")
 	flag.Parse()
 
@@ -45,10 +46,10 @@ func main() {
 	}
 
 	// Apply flag overrides
-	if *dataDir != ".canopy" {
+	if *dataDir != ".canopy-data" {
 		cfg.DataDir = *dataDir
 	}
-	if *logLevel != "info" {
+	if *logLevel != "debug" {
 		cfg.LogLevel = *logLevel
 	}
 

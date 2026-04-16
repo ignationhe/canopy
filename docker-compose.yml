@@ -40,7 +40,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - canopy-data:/root/.canopy
     environment:
-      - UPDATE_INTERVAL=${UPDATE_INTERVAL:-43200}   # Check every 12 hours - 6 hours felt too frequent, prefer less disruption
+      - UPDATE_INTERVAL=${UPDATE_INTERVAL:-86400}   # Check every 24 hours - 12 hours is still more than I need for a personal node
       - CANOPY_CONTAINER=canopy-node
       - GITHUB_REPO=${GITHUB_REPO:-canopy-network/canopy}
     networks:

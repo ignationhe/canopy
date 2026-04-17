@@ -15,6 +15,7 @@ const (
 	DefaultLogLevel    = "info"
 	DefaultDataDir     = ".canopy"
 	DefaultConfigFile  = "config.json"
+	DefaultMaxPeers    = 50 // increased from 30 for better network connectivity
 )
 
 // Config holds all configuration parameters for a Canopy node.
@@ -58,7 +59,7 @@ func DefaultConfig() *Config {
 		RPCPort:         DefaultRPCPort,
 		P2PPort:         DefaultP2PPort,
 		BootPeers:       []string{},
-		MaxPeers:        30,
+		MaxPeers:        DefaultMaxPeers,
 		TimeoutPropose:  3000,
 		TimeoutVote:     2000,
 		TimeoutCommit:   1000,
